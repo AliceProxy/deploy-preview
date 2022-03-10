@@ -57,13 +57,3 @@ spec:
   hostname: '*'
   prefix: /echo-backend/
   service: echo-server
----
-apiVersion: getambassador.io/v3alpha1
-kind: Mapping
-metadata:
-  name: echo-server-mapping-2
-  namespace: gitops-demo
-spec:
-  hostname: '*'
-  prefix: /backend/
-  service: echo-server
