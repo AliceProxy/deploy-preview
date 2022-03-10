@@ -25,6 +25,20 @@ kind: Service
 metadata:
   name: echo-server
   namespace: gitops-demo
+  labels:
+    app: echo-server
+  annotations:
+    a8r.io/description: Demo service to try the rollout feature
+    a8r.io/owner: Alice Wasko
+    a8r.io/documentation: https://www.getambassador.io/docs/cloud/latest/service-catalog/howtos/rollout/
+    a8r.io/repository: git@github.com:datawire/rollouts-demo.git
+    a8r.io/support: http://a8r.io/slack
+    a8r.io/rollouts.scm.path: manifests
+    a8r.io/rollouts.scm.branch: main
+    a8r.io/rollouts.image-repo.type: dockerhub
+    a8r.io/rollouts.image-repo.name: hashicorp/http-echo
+    a8r.io/rollouts.deployment: echo-server
+    a8r.io/rollouts.mappings: echo-server-mapping
 spec:
   ports:
     - name: http-port
@@ -37,10 +51,19 @@ spec:
 apiVersion: getambassador.io/v3alpha1
 kind: Mapping
 metadata:
-  name: echo-server
+  name: echo-server-mapping
   namespace: gitops-demo
 spec:
   hostname: '*'
   prefix: /echo-backend/
   service: echo-server
-
+---
+apiVersion: getambassador.io/v3alpha1
+kind: Mapping
+metadata:
+  name: echo-server-mapping-2
+  namespace: gitops-demo
+spec:
+  hostname: '*'
+  prefix: /backend/
+  service: echo-server
