@@ -8,7 +8,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: quote-deploy-preview-PR4}
+      app: quote-deploy-preview-PR4
   strategy:
     type: RollingUpdate
   template:
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: alicewasko/quote-previews:4-2278c9e
+          image: alicewasko/quote-previews:4-3fe86a5
           ports:
             - name: http
               containerPort: 8080
