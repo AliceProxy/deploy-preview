@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: quote-deploy-preview-PR4
+  name: quote-deploy-preview-PR4-ef1de1f
   namespace: deploy-previews
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: quote-deploy-preview-PR4
+      app: quote-deploy-preview-PR4-ef1de1f
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: quote-deploy-preview-PR4
+        app: quote-deploy-preview-PR4-ef1de1f
     spec:
       containers:
         - name: backend
