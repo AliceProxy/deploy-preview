@@ -3,3 +3,24 @@ k8s_config:
   cluster_info:
     cluster_id: ec6eede7-453f-5658-a41d-34a9bc58a4d3
     cluster_name: deploy-preview-dev
+deployment_previews:
+- workload_name: quote
+  workload_manifest: /manifests/quote-deploy.yaml
+  workload_kind: deployment
+  workload_port: 8080
+  ingress_hostname: ambassador.ambassador
+  ingress_l5hostname: deploy-previews.edgestack.me
+  ingress_port: 443
+  ingress_tls: true
+  telepresence_version: 2.5.3
+  preview_namespace: deploy-previews
+  containers:
+  - name: backend
+    environment_variables:
+    - name: EXAMPLE_ENV
+      value: "someval"
+    arguments:
+    - "--version"
+    - "--setvalue=mycoolvalue"
+    commands:
+    - "do-the-thing"
