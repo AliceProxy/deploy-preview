@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: docker.io/alicewasko$image_name:13-0c4695d
+          image: docker.io/alicewasko/quote-deploy-preview:13-c172cdb
           ports:
             - name: http
               containerPort: 8080
