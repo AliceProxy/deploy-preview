@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: docker.io/alicewasko/quote-deploy-preview:24-60c642b
+          image: docker.io/alicewasko/quote-deploy-preview:24-ddb55b6
           ports:
             - name: http
               containerPort: 8080
@@ -45,7 +45,7 @@ spec:
             - --ingress-host=35.193.14.83
           env:
             - name: AMBASSADOR_CLOUD_APIKEY
-              value: ""
+              value: MDQ0YjhiZTEtYzk5Mi00MjlmLWI5M2EtYWQ3MGNjMGE2NDdkOlJDdm51WGtCUmpYQU8wTW5rdEcwSkZ6dFBzdHRndnpxN3FZdA==
             - name: TELEPRESENCE_VERSION
               value: v2.5.3
             - name: MANAGER_NAMESPACE
