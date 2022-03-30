@@ -1,0 +1,132 @@
+# This is likely a little more permissive than it needs to be. We should clean this up as much as possible before launch
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ambassador-deploy-previews
+  namespace: deploy-previews
+  labels:
+    app.kubernetes.io/name: ambassador-deploy-previews
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ambassador-deploy-previews
+  labels:
+    app.kubernetes.io/name: ambassador-deploy-previews
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ambassador-deploy-previews
+subjects:
+- name: ambassador-deploy-previews
+  namespace: deploy-previews
+  kind: ServiceAccount
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    rbac.getambassador.io/role-group: ambassador-deploy-previews
+  name: ambassador-deploy-previews
+rules:
+- apiGroups:
+  - apps
+  - rbac.authorization.k8s.io
+  - admissionregistration.k8s.io
+  resources:
+  - deployments
+  - clusterrolebindings
+  - rolebindings
+  - clusterroles
+  - replicasets
+  - roles
+  - serviceaccounts
+  - mutatingwebhookconfigurations
+  verbs:
+  - get
+  - delete
+  - update
+  - list
+  - create
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  - pods
+  - pods/log
+  - pods/portforward
+  - services
+  - secrets
+  - configmaps
+  - endpoints
+  - nodes
+  - deployments
+  - serviceaccounts
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+  - patch
+  - create
+  - delete
+- apiGroups:
+  - getambassador.io
+  resources:
+  - '*'
+  verbs:
+  - get
+  - list
+  - watch
+  - update
+  - patch
+  - create
+  - delete
+- apiGroups:
+  - getambassador.io
+  resources:
+  - mappings/status
+  verbs:
+  - update
+- apiGroups:
+  - networking.internal.knative.dev
+  resources:
+  - clusteringresses
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.x-k8s.io
+  resources:
+  - '*'
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.internal.knative.dev
+  resources:
+  - ingresses/status
+  - clusteringresses/status
+  verbs:
+  - update
+- apiGroups:
+  - extensions
+  - networking.k8s.io
+  resources:
+  - ingresses
+  - ingressclasses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - extensions
+  - networking.k8s.io
+  resources:
+  - ingresses/status
+  verbs:
+  - update
