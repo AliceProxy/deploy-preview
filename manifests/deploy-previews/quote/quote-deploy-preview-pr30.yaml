@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: docker.io/alicewasko/quote-deploy-preview:30-3bccebe
+          image: docker.io/alicewasko/quote-deploy-preview:30-cb01851
           ports:
             - name: http
               containerPort: 8080
@@ -27,7 +27,7 @@ spec:
               cpu: "0.1"
               memory: 100Mi
         - name: todd
-          image: docker.io/alicewasko/todd:1.4
+          image: docker.io/alicewasko/todd:1.5
           ports:
             - name: http
               containerPort: 80
@@ -43,6 +43,7 @@ spec:
             - --ingress-tls=true
             - --ingress-port=443
             - --ingress-host=35.193.14.83
+            - --pull-request=https://github.com/AliceProxy/test-app/pull/30
           env:
             - name: AMBASSADOR_CLOUD_APIKEY
               valueFrom:
