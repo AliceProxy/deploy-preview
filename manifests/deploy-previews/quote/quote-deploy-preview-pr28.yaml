@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: docker.io/alicewasko/quote-deploy-preview:28-10accb2
+          image: docker.io/alicewasko/quote-deploy-preview:28-0d611a2
           ports:
             - name: http
               containerPort: 8080
@@ -48,7 +48,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: preview-deployments-apikey
-                  key: MDQ0YjhiZTEtYzk5Mi00MjlmLWI5M2EtYWQ3MGNjMGE2NDdkOlJDdm51WGtCUmpYQU8wTW5rdEcwSkZ6dFBzdHRndnpxN3FZdA==
+                  key: CLOUD_TELEPRESENCE_APIKEY
             - name: TELEPRESENCE_VERSION
               value: v2.5.3
             - name: MANAGER_NAMESPACE
