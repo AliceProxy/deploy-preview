@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: docker.io/alicewasko/quote-deploy-preview:53-0ae911f
+          image: docker.io/alicewasko/quote-deploy-preview:53-c3ccfef
           ports:
             - name: http
               containerPort: 8080
@@ -38,7 +38,7 @@ spec:
               cpu: "0.1"
               memory: 100Mi
           args:
-            - -pod-daemon
+            - pod-daemon
             - --workload-name=quote
             - --workload-namespace=gitops-demo
             - --ingress-tls=true
