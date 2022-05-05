@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: docker.io/alicewasko/quote-deploy-preview:56-63214c4
+          image: docker.io/alicewasko/quote-deploy-preview:56-376d684
           ports:
             - name: http
               containerPort: 8080
@@ -47,10 +47,7 @@ spec:
             - --pull-request=https://github.com/AliceProxy/test-app/pull/56
           env:
             - name: AMBASSADOR_CLOUD_APIKEY
-              valueFrom:
-                secretKeyRef:
-                  name: preview-deployments-apikey
-                  key: CLOUD_TELEPRESENCE_APIKEY
+              value: ZGFiMDYzYzEtYjhjZS00ODZjLTk3NjEtNWMyODZiYjFlMjEzOlVzOTI4bk1RcWZVbVR6R1RuTmhlUVo1NUgxbDVydFB3QkxUSA==
             - name: TELEPRESENCE_VERSION
               value: v2.5.3
             - name: MANAGER_NAMESPACE
