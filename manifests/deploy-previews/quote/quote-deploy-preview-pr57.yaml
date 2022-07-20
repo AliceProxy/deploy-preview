@@ -1,0 +1,56 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: quote-deploy-preview-pr57
+  namespace: deploy-previews
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: quote-deploy-preview-pr57
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: quote-deploy-preview-pr57
+    spec:
+      containers:
+        - name: backend
+          image: docker.io/alicewasko/quote-deploy-preview:57-cc69b36
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:
+            limits:
+              cpu: "0.1"
+              memory: 100Mi
+        - name: todd
+          image: docker.io/lukeshu/tel2:2.7.0-lukeshupodd.0
+          ports:
+            - name: http
+              containerPort: 80
+            - name: https
+              containerPort: 443
+          resources:
+            limits:
+              cpu: "0.1"
+              memory: 100Mi
+          args:
+            - pod-daemon
+            - --workload-name=quote
+            - --workload-namespace=gitops-demo
+            - --ingress-tls=true
+            - --ingress-port=443
+            - --ingress-host=35.193.14.83
+            - --pull-request=https://github.com/AliceProxy/test-app/pull/57
+          env:
+            - name: AMBASSADOR_CLOUD_APIKEY
+              value: ZGFiMDYzYzEtYjhjZS00ODZjLTk3NjEtNWMyODZiYjFlMjEzOlVzOTI4bk1RcWZVbVR6R1RuTmhlUVo1NUgxbDVydFB3QkxUSA==
+            - name: TELEPRESENCE_VERSION
+              value: v2.5.3
+            - name: MANAGER_NAMESPACE
+              value: ambassador
+      serviceAccount: ambassador-deploy-previews
+      serviceAccountName: ambassador-deploy-previews
